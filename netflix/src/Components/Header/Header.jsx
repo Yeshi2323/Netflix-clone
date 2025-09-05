@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/images/nn.png";
+import logo from "../../assets/images/NetflixLogo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
