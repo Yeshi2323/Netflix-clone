@@ -5,19 +5,17 @@ import requests from "../../utils/Requests";
 const Banner = () => {
   const [movie, setMovie] = useState({});
   useEffect(() => {
-    async () => {
-      try {
-        const requs = await axios.get(requests.fetchNetflixOriginals);
-        console.log(requs);
-        setMovie(
-          requs.data.results[
-            Math.floor(Math.random() * requs.data.results.length)
-          ]
-        );
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
+    async function fetchData() {
+      const request = await axios.get(requests.fetchNetflixOriginals);
+      console.log(request);
+      setMovie(
+        request.data.results[
+          Math.floor(Math.random() * request.data.results.length - 1)
+        ]
+      );
+      return request;
+    }
+    fetchData();
   }, []);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -28,18 +26,17 @@ const Banner = () => {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url('https://image.//image.tmdb.org/t/p/original${movie?.backdrop_path}')`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundImage: `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`,
+        backgroundPosition: "center center",
       }}
     >
       <div className="bannerContents">
         <h1 className="bannerTitle">
-          {movie?.title || movie?.name || movie?.originalName}
+          {movie?.title || movie?.name || movie?.original_name}
         </h1>
         <div className="bannerButton">
           <button className="bannerButton play">Play</button>
-          <button className="bannerButton">My List</button>
+          <button className="bannerButton ban2">My List</button>
         </div>
         <h1 className="bannerDescription">{truncate(movie?.overview, 150)}</h1>
       </div>
